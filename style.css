@@ -14,10 +14,8 @@
 }
 
 .node {
-    background-color: darksalmon;
+    /* background-color: darksalmon; */
     border-radius: 5px;
-
-    padding: 5px;
 
     display: grid;
     grid-template-columns:3fr 1fr 1fr;
@@ -25,6 +23,10 @@
 
 .value {
     background-color: blanchedalmond;
+    border-top: 2px solid coral;
+    border-left: 2px solid coral;
+    border-bottom: 2px solid coral;
+    border-right: 2px dashed coral;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
 
@@ -34,7 +36,11 @@
 }
 
 .next {
-    background-color: coral;
+    background-color: blanchedalmond;
+    border-top: 2px solid coral;
+    border-right: 2px solid coral;
+    border-bottom: 2px solid coral;
+
 
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
@@ -46,10 +52,10 @@
 .arrow {
     position: relative;
     width: 50px;
-    left: -20px;
+    left: -10px;
     margin: 50px 0;
     height: 0;
-    border-bottom: 10px solid #ce3700;
+    border-bottom: 10px solid coral;
 
     border-radius: 10px;
 }
@@ -60,7 +66,7 @@
     height: 0;
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
-    border-left: 30px solid #ce3700;
+    border-left: 30px solid coral;
     position: absolute;
     right: -10px;
     top: -15px;
