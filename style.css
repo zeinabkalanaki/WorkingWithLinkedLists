@@ -7,18 +7,47 @@
     padding: 0;
 }
 
+
 .wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, 200px);
     margin: 50px;
 }
 
-.node {
+.node{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+.node-header{
+
+    color: coral;
+ 
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.node-header p{
+
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+span.size-48 {
+    font-size: 48px;
+    font-variation-settings: 'OPSZ' 48;
+  }
+.node-body {
     /* background-color: darksalmon; */
     border-radius: 5px;
 
     display: grid;
-    grid-template-columns:3fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr;
+    height: 100px;
 }
 
 .value {
@@ -51,8 +80,8 @@
 
 .arrow {
     position: relative;
-    width: 50px;
-    left: -10px;
+    width: 60px;
+    left: -24px;
     margin: 50px 0;
     height: 0;
     border-bottom: 10px solid coral;
@@ -73,3 +102,75 @@
 
 
 }
+
+.arrow-icon {
+    background-color: #fff;
+    height: 2.8em;
+    width: 2.8em;
+    display: block;
+    padding: 0.5em;
+    margin-left: 40px;
+    position: relative;
+    border-radius: 4px;
+}
+
+.left-bar {
+    position: absolute;
+    background-color: transparent;
+    top: 20px;
+    left: 0;
+    width: 40px;
+    height: 10px;
+    display: block;
+    transform: rotate(35deg);
+    float: right;
+    border-radius: 2px;
+}
+
+.left-bar:after {
+    content: "";
+    background-color: coral;
+    width: 40px;
+    height: 10px;
+    display: block;
+    float: right;
+    border-radius: 6px 10px 10px 6px;
+
+}
+
+.right-bar {
+    position: absolute;
+    background-color: transparent;
+    top: 20px;
+    left: 26px;
+    width: 40px;
+    height: 10px;
+    display: block;
+    transform: rotate(-35deg);
+    float: right;
+    border-radius: 2px;
+}
+
+.right-bar:after {
+    content: "";
+    background-color: coral;
+    width: 40px;
+    height: 10px;
+    display: block;
+    float: right;
+    border-radius: 10px 6px 6px 10px;
+
+}
+
+
+/* .open {
+      .left-bar:after {
+      transform-origin: center center;
+      transform: rotate(-70deg);
+    }
+    .right-bar:after {
+      transform-origin: center center;
+      transform: rotate(70deg);
+    }
+  
+  } */
