@@ -31,11 +31,16 @@ class LinkedList {
     }
     return elementsList;
   }
+
+  draw(){
+    alert("draw")
+  }
 }
 
 const linkedList = new LinkedList();
-linkedList.append(1)
-linkedList.append("1")
-linkedList.append(true)
+linkedList.append(1);
+linkedList.append("1");
+linkedList.append(true);
+linkedList.draw();
 
 console.log(linkedList.toArray());

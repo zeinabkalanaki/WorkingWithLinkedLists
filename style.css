@@ -5,24 +5,41 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: coral;
 }
 
+span.size-48 {
+    font-size: 48px;
+    font-variation-settings: 'OPSZ' 48;
+}
+
+span.size-60 {
+    font-size: 80px;
+    font-variation-settings: 'OPSZ' 80;
+}
 
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-columns: repeat(auto-fill, 210px);
     margin: 50px;
 }
 
-.node{
+.node {
     display: flex;
     flex-direction: column;
     justify-content: end;
 }
-.node-header{
+.indicate{
+
+    border: 1px dashed;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.node-header {
 
     color: coral;
- 
+
 
     display: flex;
     flex-direction: column;
@@ -30,25 +47,40 @@
     align-items: flex-start;
 }
 
-.node-header p{
+.node-header p {
 
     font-weight: bold;
-    text-align: center;
     font-size: 20px;
+    padding-top: 20px;
+
 }
 
-span.size-48 {
-    font-size: 48px;
-    font-variation-settings: 'OPSZ' 48;
-  }
+.modify {
+    width: 100%;
+    padding-right: 40px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+
+
 .node-body {
-    /* background-color: darksalmon; */
+
     border-radius: 5px;
 
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
-    height: 100px;
+
+    padding: 10px;
+
 }
+
 
 .value {
     background-color: blanchedalmond;
@@ -78,99 +110,67 @@ span.size-48 {
     align-items: center;
 }
 
-.arrow {
+.next-arrow-container {
     position: relative;
-    width: 60px;
-    left: -24px;
-    margin: 50px 0;
-    height: 0;
-    border-bottom: 10px solid coral;
-
-    border-radius: 10px;
+    top: -40px;
+    left: -30px;
 }
 
-.arrow::after {
+.next-arrow-container span {
+    position: absolute;
+}
+
+
+/*******************/
+
+.triangle,
+.triangle:before,
+.triangle:after {
+    width: 4em;
+    height: 4em;
+}
+
+.triangle {
+    overflow: hidden;
+    position: relative;
+    margin: 7em auto 0;
+    border-radius: 20%;
+    transform: translateY(50%) rotate(30deg) skewY(30deg) scaleX(.866);
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.triangle:before,
+.triangle:after {
+    position: absolute;
+    background: orange;
+    pointer-events: auto;
     content: '';
-    width: 0;
-    height: 0;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
-    border-left: 30px solid coral;
-    position: absolute;
-    right: -10px;
-    top: -15px;
-
-
 }
 
-.arrow-icon {
-    background-color: #fff;
-    height: 2.8em;
-    width: 2.8em;
-    display: block;
-    padding: 0.5em;
-    margin-left: 40px;
-    position: relative;
-    border-radius: 4px;
+.triangle:before {
+    border-radius: 20% 20% 20% 53%;
+    transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) skewX(30deg) scaleY(.866) translateX(-24%);
 }
 
-.left-bar {
-    position: absolute;
-    background-color: transparent;
-    top: 20px;
-    left: 0;
-    width: 40px;
-    height: 10px;
-    display: block;
-    transform: rotate(35deg);
-    float: right;
-    border-radius: 2px;
+.triangle:after {
+    border-radius: 20% 20% 53% 20%;
+    transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) skewX(-30deg) scaleY(.866) translateX(24%);
 }
 
-.left-bar:after {
-    content: "";
-    background-color: coral;
-    width: 40px;
-    height: 10px;
-    display: block;
-    float: right;
-    border-radius: 6px 10px 10px 6px;
+/** extra styles to show how it works **/
 
+.triangle:hover {
+    overflow: visible;
 }
 
-.right-bar {
-    position: absolute;
-    background-color: transparent;
-    top: 20px;
-    left: 26px;
-    width: 40px;
-    height: 10px;
-    display: block;
-    transform: rotate(-35deg);
-    float: right;
-    border-radius: 2px;
+.triangle:hover:before,
+.triangle:hover:after {
+    background: none;
 }
 
-.right-bar:after {
-    content: "";
-    background-color: coral;
-    width: 40px;
-    height: 10px;
-    display: block;
-    float: right;
-    border-radius: 10px 6px 6px 10px;
-
+.triangle:hover,
+.triangle:hover:before,
+.triangle:hover:after {
+    border: dashed 1px;
 }
-
-
-/* .open {
-      .left-bar:after {
-      transform-origin: center center;
-      transform: rotate(-70deg);
-    }
-    .right-bar:after {
-      transform-origin: center center;
-      transform: rotate(70deg);
-    }
-  
-  } */
