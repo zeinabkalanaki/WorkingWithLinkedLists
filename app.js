@@ -49,7 +49,7 @@ class LinkedList {
     if (mlist.length == 1) {
 
       container.insertAdjacentHTML(
-        "afterend",
+        "beforebegin",
         `<div id="node">
             <div class="node-header">
                 <div class="indicator">
@@ -82,7 +82,7 @@ class LinkedList {
     mlist.forEach((note, index) => {
       if (index == 0) {
         container.insertAdjacentHTML(
-          "afterend",
+          "beforebegin",
           `<div class="node">
                 <div class="node-header">
                     <div class="indicator">
@@ -114,7 +114,7 @@ class LinkedList {
 
  if(index == (mlist.length - 1) ){
   container.insertAdjacentHTML(
-    "afterend",`
+    "beforebegin",`
         <div class="node">
             <div class="node-header">
                 <p>Tail</p>
@@ -142,11 +142,11 @@ class LinkedList {
 
  if (index != 0 && index != (mlist.length - 1)) {
   container.insertAdjacentHTML(
-    "afterend",`
+    "beforebegin",`
     <div class="node">
     <div class="node-header">
     </div>
-    <div class="indicate">
+
         <div class="node-body ">
             <div class="value">
                 <p>middle</p>
@@ -163,7 +163,7 @@ class LinkedList {
             <span class="material-symbols-rounded">delete</span>
             <span class="material-symbols-rounded">add_box</span>
         </div>
-    </div>
+
    
 </div>`)
  }
@@ -173,9 +173,18 @@ class LinkedList {
 }
 
 const linkedList = new LinkedList();
-linkedList.append(1);
-linkedList.append("1");
- linkedList.append(true);
+//linkedList.append(1);
+ //linkedList.append("1");
+//  linkedList.append("1");
+//  linkedList.append("1");
+//  linkedList.append("1");
+//  linkedList.append("1");
+//  linkedList.append("1");
+//  linkedList.append("1");
+//  linkedList.append("1");
+//  linkedList.append("1");
+//  linkedList.append("1");
+  linkedList.append(true);
 linkedList.draw();
 
 console.log(linkedList.toArray());
