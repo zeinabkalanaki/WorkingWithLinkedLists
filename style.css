@@ -8,6 +8,25 @@
     color: coral;
 }
 
+#create p{
+    border: 4px dashed coral;
+
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+
+}
+
 span.size-48 {
     font-size: 48px;
     font-variation-settings: 'OPSZ' 48;
@@ -28,6 +47,7 @@ span.size-60 {
     display: flex;
     flex-direction: column;
     justify-content: end;
+
 }
 .indicate{
 
@@ -37,9 +57,6 @@ span.size-60 {
 }
 
 .node-header {
-
-    color: coral;
-
 
     display: flex;
     flex-direction: column;
