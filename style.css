@@ -85,6 +85,11 @@ span.size-60 {
 
 }
 
+.modify span {
+cursor: pointer;
+
+}
+
 
 
 .node-body {

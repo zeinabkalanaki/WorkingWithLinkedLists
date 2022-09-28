@@ -2,30 +2,42 @@ const container = document.getElementById("create");
 
 class LinkedList {
   constructor() {
-    this.first = null;
-    this.last = null;
+    this.head = null;
+    this.tail = null;
   }
 
   append(value) {
     const newNode = { value: value, next: null /*append to end */ };
 
-    if (this.last) {
+    if (this.tail) {
       /* check list is not empty */
-      this.last.next = newNode; /* update current last */
+      this.tail.next = newNode; /* update current tail */
     }
-    this.last = newNode; /* set current last */
+    this.tail = newNode; /* set current tail */
 
-    if (!this.first) {
+    if (!this.head) {
       /* check list is not empty */
-      this.first = newNode;
+      this.head = newNode;
+      this.head.next = this.tail;
+    }
+  }
+
+  myprepend(value) {
+    const newNode = { value: value, next: this.head };
+
+    this.head = newNode;
+
+    if (!this.tail) {
+      /* check list is not empty */
+      this.tail = newNode;
     }
   }
 
   toArray() {
     const elementsList = [];
 
-    if (this.first) {
-      let current = this.first;
+    if (this.head) {
+      let current = this.head;
       while (current) {
         elementsList.push(current);
         current = current.next;
@@ -34,20 +46,60 @@ class LinkedList {
     return elementsList;
   }
 
+  indexOf(value) {
+    var index = 0;
+    var current = this.head;
+    while (current != null) {
+      if (current.value === value) return index;
+      current = current.next;
+      index++;
+    }
+
+    return -1;
+  }
+
+  findByIndex(input) {
+    var index = 0;
+    var current = this.head;
+    while (current != null) {
+      if (index == input) return current;
+      current = current.next;
+      index++;
+    }
+
+    return null;
+  }
+
+  addAfter(index) {
+    var next = this.findByIndex(index + 1);
+    const newNode = {
+      value: (Math.random() + 1).toString(36).substring(7) + " New",
+      next: next,
+    };
+
+    if (next == null) this.tail = newNode;
+
+    var previous = this.findByIndex(index);
+    previous.next = newNode;
+  }
+
+  remove(index) {
+    var previous = this.findByIndex(index - 1);
+    var next = this.findByIndex(index + 1);
+    previous.next = next;
+  }
+
   draw() {
     document.querySelectorAll(".node").forEach((note) => note.remove());
 
-    const mlist = this.toArray();
-
-    if (mlist.length == 0) {
+    if (this.head == null) {
       container.style.display = "block";
       return;
     }
 
     container.style.display = "none";
 
-    if (mlist.length == 1) {
-
+    if (this.head.value === this.tail.value) {
       container.insertAdjacentHTML(
         "beforebegin",
         `<div id="node">
@@ -60,7 +112,7 @@ class LinkedList {
             <div class="indicate">
                 <div class="node-body ">
                     <div class="value">
-                        <p>first</p>
+                        <p>${this.head.value}</p>
                         
                     </div>
                     <div class="next">
@@ -68,8 +120,8 @@ class LinkedList {
                     </div>
                 </div>
                 <div class="modify">
-                    <span class="material-symbols-rounded">delete</span>
-                    <span class="material-symbols-rounded">add_box</span>
+                <span class="material-symbols-rounded" onclick="removeMe(0)" >delete</span>
+                    <span class="material-symbols-rounded" onclick="testme(0)" >add_box</span>
                 </div>
             </div>
         </div>`
@@ -79,8 +131,9 @@ class LinkedList {
 
     container.style.display = "none";
 
-    mlist.forEach((note, index) => {
-      if (index == 0) {
+    var current = this.head;
+    while (current.next != null) {
+      if (current.value === this.head.value) {
         container.insertAdjacentHTML(
           "beforebegin",
           `<div class="node">
@@ -93,7 +146,7 @@ class LinkedList {
                 <div class="indicate">
                     <div class="node-body ">
                         <div class="value">
-                            <p>first</p>
+                            <p>${current.value}</p>
                             
                         </div>
                         <div class="next">
@@ -104,87 +157,103 @@ class LinkedList {
                         </div>
                     </div>
                     <div class="modify">
-                        <span class="material-symbols-rounded">delete</span>
-                        <span class="material-symbols-rounded">add_box</span>
+                        <span class="material-symbols-rounded" onclick="removeMe(${this.indexOf(
+                          current.value
+                        )})" >delete</span>
+                        <span class="material-symbols-rounded" onclick="testme(${this.indexOf(
+                          current.value
+                        )})" >add_box</span>
                     </div>
                 </div>
             </div>`
         );
+      } else {
+        container.insertAdjacentHTML(
+          "beforebegin",
+          `
+              <div class="node">
+              <div class="node-header">
+              </div>
+      
+                  <div class="node-body ">
+                      <div class="value">
+                      <p>${current.value}</p>
+      
+                      </div>
+                      <div class="next">
+                      <span  class="material-symbols-rounded size-48">radio_button_checked</span>
+                      <div class="next-arrow-container">
+                          <span class="material-symbols-rounded  size-60">arrow_right_alt</span>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="modify">
+                  <span class="material-symbols-rounded" onclick="removeMe(${this.indexOf(
+                    current.value
+                  )})" >delete</span>
+                      <span class="material-symbols-rounded" onclick="testme(${this.indexOf(
+                        current.value
+                      )})" >add_box</span>
+                  </div>
+      
+          </div>`
+        );
       }
+      current = current.next;
+    }
 
- if(index == (mlist.length - 1) ){
-  container.insertAdjacentHTML(
-    "beforebegin",`
-        <div class="node">
-            <div class="node-header">
-                <p>Tail</p>
-                <span class="material-symbols-rounded size-48 ">upgrade</span>
-               
-            </div>
-            <div class="indicate">
-                <div class="node-body ">
-                    <div class="value">
-                        <p>last</p>
-                        
+    container.insertAdjacentHTML(
+      "beforebegin",
+      `
+                <div class="node">
+                    <div class="node-header">
+                        <p>Tail</p>
+                        <span class="material-symbols-rounded size-48 ">upgrade</span>
+                       
                     </div>
-                    <div class="next">
-                        <span class="material-symbols-rounded  size-48">cancel</span>
+                    <div class="indicate">
+                        <div class="node-body ">
+                            <div class="value">
+                            <p>${this.tail.value}</p>
+                            </div>
+                            <div class="next">
+                                <span class="material-symbols-rounded  size-48">cancel</span>
+                            </div>
+                        </div>
+                        <div class="modify">
+                        <span class="material-symbols-rounded" onclick="removeMe(${this.indexOf(
+                          this.tail.value
+                        )})" >delete</span>
+                            <span class="material-symbols-rounded" onclick="testme(${this.indexOf(
+                              this.tail.value
+                            )})" >add_box</span>
+                        </div>
                     </div>
-                </div>
-                <div class="modify">
-                    <span class="material-symbols-rounded">delete</span>
-                    <span class="material-symbols-rounded">add_box</span>
-                </div>
-            </div>
-           
-        </div>`)
- }
-
- if (index != 0 && index != (mlist.length - 1)) {
-  container.insertAdjacentHTML(
-    "beforebegin",`
-    <div class="node">
-    <div class="node-header">
-    </div>
-
-        <div class="node-body ">
-            <div class="value">
-                <p>middle</p>
-                
-            </div>
-            <div class="next">
-            <span  class="material-symbols-rounded size-48">radio_button_checked</span>
-            <div class="next-arrow-container">                
-                <span class="material-symbols-rounded  size-60">arrow_right_alt</span>
-            </div>
-            </div>
-        </div>
-        <div class="modify">
-            <span class="material-symbols-rounded">delete</span>
-            <span class="material-symbols-rounded">add_box</span>
-        </div>
-
-   
-</div>`)
- }
-
-    });
+                   
+                </div>`
+    );
   }
 }
 
 const linkedList = new LinkedList();
-//linkedList.append(1);
- //linkedList.append("1");
-//  linkedList.append("1");
-//  linkedList.append("1");
-//  linkedList.append("1");
-//  linkedList.append("1");
-//  linkedList.append("1");
-//  linkedList.append("1");
-//  linkedList.append("1");
-//  linkedList.append("1");
-//  linkedList.append("1");
-  linkedList.append(true);
+
+linkedList.append((Math.random() + 1).toString(36).substring(7));
+linkedList.append((Math.random() + 1).toString(36).substring(7));
+linkedList.append((Math.random() + 1).toString(36).substring(7));
+linkedList.append((Math.random() + 1).toString(36).substring(7));
+
 linkedList.draw();
 
-console.log(linkedList.toArray());
+function testme(params) {
+  linkedList.addAfter(params);
+  console.log(linkedList);
+  linkedList.draw();
+  console.log(linkedList);
+}
+
+function removeMe(params) {
+  linkedList.remove(params);
+  console.log(linkedList);
+  linkedList.draw();
+  console.log(linkedList);
+}
